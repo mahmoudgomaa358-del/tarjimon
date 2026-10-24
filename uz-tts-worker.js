@@ -1,7 +1,7 @@
 // Uzbek text-to-speech that runs on the phone itself (Meta MMS voice, Cyrillic model).
 // The model downloads once (cached by the browser) and then works offline.
 // Everything is loaded from the app's own files, so it keeps working offline.
-import { pipeline, env } from "./vendor/transformers.min.js";
+import { AutoTokenizer, VitsModel, env } from "./vendor/transformers.min.js";
 
 env.allowRemoteModels = false;
 env.allowLocalModels = true;
@@ -16,7 +16,12 @@ function progress(p) {
   if (p.status === "progress" && /\.onnx$/.test(p.file || "")) postMessage({ type: "progress", pct: Math.round(p.progress || 0) });
 }
 async function load(dtype) {
-  tts = await pipeline("text-to-speech", MODEL, { dtype, progress_callback: progress });
+  const tokenizer = await AutoTokenizer.from_pretrained(MODEL);
+  const model = await VitsModel.from_pretrained(MODEL, { dtype, progress_callback: progress });
+  tts = async (text) => {
+    const { waveform } = await model(tokenizer(text));
+    return { audio: waveform.data, sampling_rate: model.config.sampling_rate || 16000 };
+  };
   dtypeInUse = dtype;
   postMessage({ type: "ready" });
 }
