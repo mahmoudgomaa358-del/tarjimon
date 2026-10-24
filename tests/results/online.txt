@@ -1,0 +1,8 @@
+google_tts tl=ar referer=none -> 200 audio/mpeg 11328
+google_tts tl=ar referer=ghpages -> 404 text/html; charset=utf-8 1652
+google_tts tl=uz referer=none -> 400 text/html; charset=utf-8 1695
+google_tts tl=uz referer=ghpages -> 404 text/html; charset=utf-8 1652
+google_tts tl=ru referer=none -> 200 audio/mpeg 8448
+google_tts tl=ru referer=ghpages -> 404 text/html; charset=utf-8 1652
+google_tts tl=en referer=none -> 200 audio/mpeg 6912
+google_tts tl=en referer=ghpages -> 404 text/html; charset=utf-8 1652
