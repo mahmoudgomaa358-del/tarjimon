@@ -52,7 +52,8 @@ select{appearance:none;border:0;background:var(--soft);color:var(--c);font:700 1
 .mini button{border:0;background:transparent;color:var(--muted);width:38px;height:38px;border-radius:50%;cursor:pointer}
 .mini button:disabled{opacity:.3}
 .mini svg{width:20px;height:20px}
-.text{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.text{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.text>:first-child{margin-top:auto}.text>:last-child{margin-bottom:auto}
 .main-text{font-size:clamp(1.25rem,5.2vw,1.9rem);line-height:1.35;font-weight:500;overflow-wrap:anywhere}
 .sub-text{font-size:.92rem;color:var(--muted);line-height:1.4;overflow-wrap:anywhere}
 .hint{color:var(--muted);font-size:1rem}
@@ -144,7 +145,7 @@ function build(side){
   root.appendChild(document.getElementById("sideTpl").content.cloneNode(true));
   const el={root,select:root.querySelector("select"),main:root.querySelector(".main-text"),sub:root.querySelector(".sub-text"),
     mic:root.querySelector(".mic"),label:root.querySelector(".label"),copy:root.querySelector(".copy"),replay:root.querySelector(".replay"),
-    kbd:root.querySelector(".kbd"),form:root.querySelector(".typebox"),input:root.querySelector(".typebox input")};
+    box:root.querySelector(".text"),kbd:root.querySelector(".kbd"),form:root.querySelector(".typebox"),input:root.querySelector(".typebox input")};
   el.form.id="type"+side;
   for(const [code,l] of Object.entries(LANGS)){const o=document.createElement("option");o.value=code;o.textContent=l.name;el.select.appendChild(o)}
   el.select.addEventListener("change",()=>{
@@ -152,10 +153,10 @@ function build(side){
     state[side].lang=el.select.value;store.set(side,state[side].lang);render();
   });
   el.mic.addEventListener("click",()=>toggleListen(side));
-  el.replay.addEventListener("click",()=>{const s=state[side];if(s.main)speak(s.main,s.lang)});
+  el.replay.addEventListener("click",()=>{unlockAudio();const s=state[side];if(s.main)speak(s.main,s.lang)});
   el.copy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(state[side].main);toast("Copied")}catch{toast("Could not copy")}});
   el.kbd.addEventListener("click",()=>{el.form.hidden=!el.form.hidden;if(!el.form.hidden)el.input.focus()});
-  el.form.addEventListener("submit",e=>{e.preventDefault();const t=el.input.value.trim();if(t){el.input.value="";handleHeard(side,t)}});
+  el.form.addEventListener("submit",e=>{e.preventDefault();unlockAudio();preloadUz();const t=el.input.value.trim();if(t){el.input.value="";handleHeard(side,t)}});
   ui[side]=el;
 }
 
@@ -163,6 +164,7 @@ function render(){
   for(const side of ["A","B"]){
     const s=state[side],el=ui[side],L=LANGS[s.lang];
     el.select.value=s.lang;
+    if(el.last!==s.main+"|"+s.sub){el.last=s.main+"|"+s.sub;requestAnimationFrame(()=>{el.box.scrollTop=listening===side?el.box.scrollHeight:0})}
     el.main.textContent=s.main||"";
     el.sub.textContent=s.sub||"";
     if(!s.main){el.main.innerHTML="";const h=document.createElement("span");h.className="hint";h.textContent=L.hint;el.main.appendChild(h)}
@@ -182,9 +184,10 @@ const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
 let rec=null, listening=null, busy=null, heard="";
 
 function toggleListen(side){
+  unlockAudio(); preloadUz();
   if(listening===side){rec&&rec.stop();return}
   if(rec){rec.abort();rec=null}
-  speechSynthesis&&speechSynthesis.cancel();
+  stopAudio();
   if(!SR){toast("Voice input isn't supported in this browser. Open the app in Google Chrome, or use the keyboard button.",6000);return}
   if(!navigator.onLine){toast("No internet connection.");return}
   rec=new SR();
@@ -249,8 +252,44 @@ let voices=[];
 function loadVoices(){voices=speechSynthesis?speechSynthesis.getVoices():[]}
 if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
 let audio=null;
+
+/* Uzbek voice: runs on the phone (downloads once, then works offline) */
+let actx=null, uzWorker=null, uzReady=false, uzSeq=0, uzSource=null;
+function unlockAudio(){
+  try{ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==="suspended") actx.resume(); }catch{}
+}
+function stopAudio(){
+  try{speechSynthesis.cancel()}catch{}
+  if(audio){audio.pause();audio=null}
+  if(uzSource){try{uzSource.stop()}catch{} uzSource=null}
+}
+function getUzWorker(){
+  if(uzWorker) return uzWorker;
+  uzWorker=new Worker("uz-tts-worker.js",{type:"module"});
+  uzWorker.onmessage=({data})=>{
+    if(data.type==="progress" && !uzReady) toast(`Downloading the Uzbek voice: ${data.pct}% (first time only)`,4000);
+    else if(data.type==="ready"){ if(!uzReady) toast("O‘zbekcha ovoz tayyor ✓ Uzbek voice ready",2500); uzReady=true; }
+    else if(data.type==="audio" && data.id===uzSeq) playPcm(data.audio,data.rate);
+    else if(data.type==="error" && data.id===uzSeq){ console.error(data.message); toast("Uzbek voice failed to play. Check your internet for the first download.",5000); }
+  };
+  uzWorker.onerror=e=>{console.error(e);toast("Uzbek voice couldn't start on this phone.",5000)};
+  return uzWorker;
+}
+function playPcm(pcm,rate){
+  unlockAudio(); if(!actx) return;
+  const buf=actx.createBuffer(1,pcm.length,rate); buf.copyToChannel(pcm,0);
+  stopAudio();
+  uzSource=actx.createBufferSource(); uzSource.buffer=buf; uzSource.connect(actx.destination); uzSource.start();
+}
+function speakUzbek(text){
+  if(!uzReady) toast("Preparing the Uzbek voice…",3000);
+  getUzWorker().postMessage({id:++uzSeq,text});
+}
+
 function speak(text,lang){
   const L=LANGS[lang];
+  if(lang==="uz"){ speakUzbek(text); return; }
+  stopAudio();
   const v=voices.find(v=>v.lang.replace("_","-").toLowerCase().startsWith(lang));
   if(v&&"speechSynthesis" in window){
     speechSynthesis.cancel();
@@ -263,6 +302,11 @@ function speak(text,lang){
   audio.play().catch(()=>toast(L.noVoice+". The text is shown on screen.",5000));
 }
 
+let uzPreloaded=false;
+function preloadUz(){
+  if(uzPreloaded||(state.A.lang!=="uz"&&state.B.lang!=="uz"))return;
+  uzPreloaded=true; getUzWorker().postMessage({preload:true});
+}
 /* ---------- Wiring ---------- */
 build("A");build("B");render();
 document.getElementById("swapBtn").addEventListener("click",()=>{
