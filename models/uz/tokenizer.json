@@ -1,0 +1,102 @@
+{
+ "version": "1.0",
+ "truncation": null,
+ "padding": null,
+ "added_tokens": [
+  {
+   "id": 45,
+   "content": "<unk>",
+   "single_word": false,
+   "lstrip": false,
+   "rstrip": false,
+   "normalized": false,
+   "special": true
+  }
+ ],
+ "normalizer": {
+  "type": "Sequence",
+  "normalizers": [
+   {
+    "type": "Lowercase"
+   },
+   {
+    "type": "Replace",
+    "pattern": {
+     "Regex": "[^ 0123456|абвгдежзийклмнопрстуфхчшъьэюяёўғқҳ–—]"
+    },
+    "content": ""
+   },
+   {
+    "type": "Strip",
+    "strip_left": true,
+    "strip_right": true
+   },
+   {
+    "type": "Replace",
+    "pattern": {
+     "Regex": "(?=.)|(?<!^)$"
+    },
+    "content": "|"
+   }
+  ]
+ },
+ "pre_tokenizer": {
+  "type": "Split",
+  "pattern": {
+   "Regex": ""
+  },
+  "behavior": "Isolated",
+  "invert": false
+ },
+ "post_processor": null,
+ "decoder": null,
+ "model": {
+  "vocab": {
+   " ": 44,
+   "0": 36,
+   "1": 37,
+   "2": 38,
+   "3": 42,
+   "4": 39,
+   "5": 43,
+   "6": 40,
+   "|": 0,
+   "а": 1,
+   "б": 9,
+   "в": 24,
+   "г": 8,
+   "д": 6,
+   "е": 19,
+   "ж": 30,
+   "з": 16,
+   "и": 2,
+   "й": 20,
+   "к": 15,
+   "л": 4,
+   "м": 11,
+   "н": 3,
+   "о": 7,
+   "п": 28,
+   "р": 5,
+   "с": 13,
+   "т": 12,
+   "у": 10,
+   "ф": 31,
+   "х": 23,
+   "ч": 22,
+   "ш": 18,
+   "ъ": 35,
+   "ь": 41,
+   "э": 25,
+   "ю": 34,
+   "я": 27,
+   "ё": 26,
+   "ў": 17,
+   "ғ": 29,
+   "қ": 14,
+   "ҳ": 21,
+   "–": 32,
+   "—": 33
+  }
+ }
+}

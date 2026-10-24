@@ -1,0 +1,13 @@
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:00,  6.36it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  3.50it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  3.57it/s]
+Traceback (most recent call last):
+  File "/home/runner/work/tarjimon/tarjimon/tests/build_uz_model.py", line 11, in <module>
+    fp16 = float16.convert_float_to_float16(m, keep_io_types=True, op_block_list=["RandomNormalLike","RandomNormal","RandomUniformLike","Range","CumSum","Pad","Softplus"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py", line 249, in convert_float_to_float16
+    n = convert_tensor_float_to_float16(n, min_positive_val, max_finite_val)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py", line 91, in convert_tensor_float_to_float16
+    float32_list = np.fromstring(tensor.raw_data, dtype='float32')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: The binary mode of fromstring is removed, use frombuffer instead
