@@ -15,8 +15,7 @@ async function load(dtype) {
   postMessage({ type: "ready" });
 }
 async function ensure() {
-  if (tts) return;
-  try { await load("fp16"); } catch { await load("fp32"); }
+  if (!tts) await load("fp32");   // the fp16 file of this model is broken, so always use full precision
 }
 
 // ---- Uzbek Latin -> Cyrillic (the voice model reads Cyrillic) ----
@@ -66,12 +65,7 @@ onmessage = async ({ data }) => {
   try {
     await ensure();
     if (preload) return;
-    let res;
-    try { res = await synth(text); }
-    catch (e) {
-      if (dtypeInUse !== "fp16") throw e;
-      tts = null; await load("fp32"); res = await synth(text);   // fp16 not supported on this phone
-    }
+    const res = await synth(text);
     postMessage({ type: "audio", id, audio: res.audio, rate: res.rate }, [res.audio.buffer]);
   } catch (err) {
     postMessage({ type: "error", id, message: String(err && err.message || err) });

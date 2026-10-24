@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Tarjimon</title>
 <meta name="theme-color" content="#14306b">
+<meta name="referrer" content="no-referrer">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -259,6 +260,7 @@ function unlockAudio(){
   try{ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==="suspended") actx.resume(); }catch{}
 }
 function stopAudio(){
+  ttsRun++;
   try{speechSynthesis.cancel()}catch{}
   if(audio){audio.pause();audio=null}
   if(uzSource){try{uzSource.stop()}catch{} uzSource=null}
@@ -296,11 +298,26 @@ function speak(text,lang){
     const u=new SpeechSynthesisUtterance(text);u.voice=v;u.lang=v.lang;u.rate=.95;
     speechSynthesis.speak(u);return;
   }
-  // Fallback: online voice
-  if(audio){audio.pause()}
-  audio=new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${lang}&q=${encodeURIComponent(text.slice(0,200))}`);
-  audio.play().catch(()=>toast(L.noVoice+". The text is shown on screen.",5000));
+  // Fallback: online voice (Google), played in pieces of up to ~180 characters
+  const chunks=[];let rest=text.trim();
+  while(rest.length){
+    if(rest.length<=180){chunks.push(rest);break}
+    let cut=Math.max(rest.lastIndexOf(". ",180),rest.lastIndexOf("، ",180),rest.lastIndexOf(", ",180),rest.lastIndexOf("? ",180),rest.lastIndexOf("! ",180));
+    if(cut<60)cut=rest.lastIndexOf(" ",180);
+    if(cut<1)cut=180;
+    chunks.push(rest.slice(0,cut+1).trim());rest=rest.slice(cut+1).trim();
+  }
+  const run=++ttsRun;
+  const playNext=i=>{
+    if(run!==ttsRun||i>=chunks.length)return;
+    audio=new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${lang}&total=${chunks.length}&idx=${i}&textlen=${chunks[i].length}&q=${encodeURIComponent(chunks[i])}`);
+    audio.referrerPolicy="no-referrer";
+    audio.onended=()=>playNext(i+1);
+    audio.play().catch(()=>{if(i===0)toast(L.noVoice+". The text is shown on screen.",5000)});
+  };
+  playNext(0);
 }
+let ttsRun=0;
 
 let uzPreloaded=false;
 function preloadUz(){

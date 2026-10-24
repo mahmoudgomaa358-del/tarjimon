@@ -1,5 +1,5 @@
 // Caches the app screen so it opens instantly and without internet.
-const CACHE = "tarjimon-v2";
+const CACHE = "tarjimon-v3";
 const FILES = ["./", "index.html", "manifest.json", "icon.svg", "icon-192.png", "icon-512.png", "uz-tts-worker.js"];
 
 self.addEventListener("install", e => {
