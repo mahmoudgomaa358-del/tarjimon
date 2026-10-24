@@ -1,11 +1,4 @@
-TOKENIZER FAIL TypeError: Do not know how to serialize a BigInt
-    at JSON.stringify (<anonymous>)
-    at file:///home/runner/work/tarjimon/tarjimon/tests/uz-test.mjs:4:92
-fp16 FAIL Error: Load model from /home/runner/work/tarjimon/tarjimon/tests/node_modules/@huggingface/transformers/.cache/davron112/mms-tts-uzb-cyrl-onnx/onnx/model_fp16.onnx failed:Type Error: Type (tensor(float16)) of output arg (/Cast_output_0) of node (/Cast) does not match expected type (tensor(float)).
-    at new OnnxruntimeSessionHandler (/home/runner/work/tarjimon/tarjimon/tests/node_modules/onnxruntime-node/dist/backend.js:25:92)
-    at Immediate.<anonymous> (/home/runner/work/tarjimon/tarjimon/tests/node_modules/onnxruntime-node/dist/backend.js:67:29)
-    at process.processImmediate (node:internal/timers:483:21)
-fp32 FAIL Error: Load model from /home/runner/work/tarjimon/tarjimon/tests/node_modules/@huggingface/transformers/.cache/davron112/mms-tts-uzb-cyrl-onnx/onnx/model_fp16.onnx failed:Type Error: Type (tensor(float16)) of output arg (/Cast_output_0) of node (/Cast) does not match expected type (tensor(float)).
-    at new OnnxruntimeSessionHandler (/home/runner/work/tarjimon/tarjimon/tests/node_modules/onnxruntime-node/dist/backend.js:25:92)
-    at Immediate.<anonymous> (/home/runner/work/tarjimon/tarjimon/tests/node_modules/onnxruntime-node/dist/backend.js:67:29)
-    at process.processImmediate (node:internal/timers:483:21)
+male tokens 0,13,0,1,0,4,0,7,0,11,0,44,0,6,0,10,0,3,0,26,0
+male fp32 OK seconds=6.24 peak=0.294 ms=3654
+female tokens 0,13,0,1,0,4,0,7,0,11,0,44,0,6,0,10,0,3,0,26,0
+female fp32 OK seconds=6.05 peak=0.348 ms=3435
