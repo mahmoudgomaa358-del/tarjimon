@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Tarjimon" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#14306B</item>
+        <item name="android:navigationBarColor">#14306B</item>
+        <item name="android:windowBackground">@color/bg</item>
+    </style>
+</resources>
