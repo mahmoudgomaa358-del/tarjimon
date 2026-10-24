@@ -1,0 +1,34 @@
+name: voice-test
+on:
+  push:
+    paths: ["tests/**", ".github/workflows/voice-test.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Test online voices
+        run: |
+          mkdir -p tests/results
+          {
+          for tl in ar uz ru en; do
+            for ref in none ghpages; do
+              H=(); [ $ref = ghpages ] && H=(-H "Referer: https://mahmoudgomaa358-del.github.io/")
+              code=$(curl -s -o /tmp/a.mp3 -w "%{http_code} %{content_type} %{size_download}" "${H[@]}" "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=$tl&q=%D8%B3%D9%84%D8%A7%D9%85%20hello")
+              echo "google_tts tl=$tl referer=$ref -> $code"
+            done
+          done
+          } > tests/results/online.txt 2>&1 || true
+      - name: Test Uzbek on-device voice
+        run: |
+          cd tests && npm i --silent @huggingface/transformers@3.5.1 && node uz-test.mjs > results/uz.txt 2>&1 || true
+      - name: Save results
+        run: |
+          git config user.name "voice-test-bot"; git config user.email "actions@users.noreply.github.com"
+          git add tests/results; git commit -m "voice test results [skip ci]" || true; git push
