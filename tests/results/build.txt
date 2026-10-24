@@ -1,19 +1,7 @@
 Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  4.23it/s]Fetching 7 files: 100%|██████████| 7/7 [00:04<00:00,  1.53it/s]Fetching 7 files: 100%|██████████| 7/7 [00:04<00:00,  1.57it/s]
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:00,  7.35it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  5.24it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  5.30it/s]
 WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
 WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__30"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_2_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
@@ -29,31 +17,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__47"
-    }
-    dim {
       dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__78"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_8_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__89"
     }
     dim {
       dim_value: 2
@@ -65,7 +29,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__99"
+      dim_value: 2
     }
     dim {
       dim_value: 2
@@ -73,19 +37,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/feed_forward/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/feed_forward/Slice_1_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_8_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
@@ -101,18 +53,6 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__161"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
       dim_value: 3
     }
     dim {
@@ -125,31 +65,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__178"
-    }
-    dim {
       dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__209"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_8_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__220"
     }
     dim {
       dim_value: 2
@@ -161,7 +77,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__230"
+      dim_value: 2
     }
     dim {
       dim_value: 2
@@ -169,19 +85,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/feed_forward/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/feed_forward/Slice_1_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_8_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
@@ -197,18 +101,6 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__292"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
       dim_value: 3
     }
     dim {
@@ -221,31 +113,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__309"
-    }
-    dim {
       dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__340"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_8_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__351"
     }
     dim {
       dim_value: 2
@@ -257,7 +125,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__361"
+      dim_value: 2
     }
     dim {
       dim_value: 2
@@ -265,19 +133,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/feed_forward/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/feed_forward/Slice_1_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_8_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
@@ -293,18 +149,6 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__423"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
       dim_value: 3
     }
     dim {
@@ -317,31 +161,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__440"
-    }
-    dim {
       dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__471"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_8_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__482"
     }
     dim {
       dim_value: 2
@@ -353,7 +173,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__492"
+      dim_value: 2
     }
     dim {
       dim_value: 2
@@ -361,19 +181,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/feed_forward/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/feed_forward/Slice_1_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_8_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
@@ -389,18 +197,6 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__554"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
       dim_value: 3
     }
     dim {
@@ -413,31 +209,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__571"
-    }
-    dim {
       dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__602"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_8_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__613"
     }
     dim {
       dim_value: 2
@@ -449,7 +221,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__623"
+      dim_value: 2
     }
     dim {
       dim_value: 2
@@ -457,19 +229,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/feed_forward/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/feed_forward/Slice_1_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_8_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
@@ -485,18 +245,6 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__685"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
       dim_value: 3
     }
     dim {
@@ -509,31 +257,7 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__702"
-    }
-    dim {
       dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__733"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_8_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_param: "unk__744"
     }
     dim {
       dim_value: 2
@@ -545,114 +269,6 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_
   elem_type: 7
   shape {
     dim {
-      dim_param: "unk__754"
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/feed_forward/Slice_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/feed_forward/Slice_1_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/Slice_3_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 4
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__935"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_1_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__939"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__940"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_3_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__941"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_4_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__942"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
       dim_value: 2
     }
     dim {
@@ -661,11 +277,11 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/Slice_11_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_8_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
-      dim_value: 2
+      dim_value: 3
     }
     dim {
       dim_value: 2
@@ -680,7 +296,19 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1043"
+      dim_param: "unk__642"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__643"
     }
   }
 }
@@ -692,103 +320,19 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1049"
+      dim_param: "unk__649"
     }
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/Slice_3_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 4
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_1_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1167"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_1_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1171"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1172"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_3_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1173"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_4_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1174"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 2
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/Slice_11_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 2
-    }
-    dim {
-      dim_value: 2
+      dim_param: "unk__650"
     }
   }
 }
@@ -800,7 +344,19 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1275"
+      dim_param: "unk__831"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__832"
     }
   }
 }
@@ -812,103 +368,19 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1281"
+      dim_param: "unk__838"
     }
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/Slice_3_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 4
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_1_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1399"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_1_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1403"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_2_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1404"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_3_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1405"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_4_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 3
-    }
-    dim {
-      dim_param: "unk__1406"
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/Slice_6_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 2
-    }
-    dim {
-      dim_value: 2
-    }
-  }
-}
-.
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/Slice_11_output_0', type is tensor_type {
-  elem_type: 7
-  shape {
-    dim {
-      dim_value: 2
-    }
-    dim {
-      dim_value: 2
+      dim_param: "unk__839"
     }
   }
 }
@@ -920,7 +392,19 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1507"
+      dim_param: "unk__1020"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1021"
     }
   }
 }
@@ -932,32 +416,148 @@ WARNING:root:Inference failed or unsupported type to quantize for tensor '/durat
       dim_value: 3
     }
     dim {
-      dim_param: "unk__1513"
+      dim_param: "unk__1027"
     }
   }
 }
 .
-WARNING:root:Inference failed or unsupported type to quantize for tensor '/Slice_output_0', type is tensor_type {
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_1_output_0', type is tensor_type {
   elem_type: 7
   shape {
     dim {
       dim_value: 3
     }
     dim {
-      dim_value: 2
+      dim_param: "unk__1028"
     }
   }
 }
 .
-Traceback (most recent call last):
-  File "/home/runner/work/tarjimon/tarjimon/tests/build_uz_model.py", line 10, in <module>
-    quantize_dynamic(src + "/onnx/model.onnx", out + "/onnx/model_quantized.onnx", weight_type=QuantType.QUInt8)
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/quantize.py", line 688, in quantize_dynamic
-    quantizer.quantize_model()
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/onnx_quantizer.py", line 211, in quantize_model
-    op_quantizer.quantize()
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/operators/conv.py", line 132, in quantize
-    self.add_bias(nodes, scaled_output_name)
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/operators/conv.py", line 36, in add_bias
-    raise ValueError(f"Expected {node.input[1]} to be an initializer")
-ValueError: Expected /flow/flows.3/wavenet/in_layers.0/weight/weight.0/Mul_output_0 to be an initializer
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -2.2379282427209546e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -6.559495346891708e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.709044283870753e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -4.7921435708531135e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -5.859761031956623e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -7.945141078380402e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 9.622164753864126e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 8.71959926485033e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 9.630082509204385e-09 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -3.443928875412894e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 7.688576886266674e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 3.5742772297453484e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -9.609178164282639e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 6.1875393697619074e-09 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.3273101728827896e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -6.286963127877243e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -7.459228612560764e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 7.078983799146954e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 4.5310518004271216e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -3.844815310571903e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 7.565027715372707e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -1.4485548760490019e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 8.591620193065808e-10 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -9.906202969034439e-09 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.1041146663615109e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -1.3431782353023891e-09 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 5.130272739961583e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -1.6904762034641863e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.051775910809738e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -3.6957271021265115e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -5.669895841720063e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -5.12595299539953e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -7.722189110381805e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 3.524528580101105e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -2.984764435609577e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 4.269699260817106e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -4.673867337601223e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.7108271466170777e-09 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -4.312773427272987e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 9.206873130551685e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 9.760001518088757e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -2.2663058985017415e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 2.237687191097848e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -7.529958878649268e-09 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 2.154438938362091e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -2.1365636371228902e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 5.857819829202526e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -5.011904491425412e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -8.007307705781841e-09 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 2.581291980163769e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 2.0017816737549765e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -7.02468696545111e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 7.142048730202077e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 3.9301443877093334e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:50: UserWarning: the float32 number -3.4028234663852886e+38 will be truncated to -10000.0
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_min, -max_finite_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -4.8409155795070546e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -3.6425051863631097e-09 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -3.458862085636838e-09 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.1432971902536337e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:53: UserWarning: the float32 number -6.019278941948869e-08 will be truncated to -1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(neg_max, -min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 8.711346310974477e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 1.784162684259627e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py:43: UserWarning: the float32 number 3.3583212655230454e-08 will be truncated to 1e-07
+  warnings.warn("the float32 number {} will be truncated to {}".format(pos_min, min_positive_val))
+model_fp16.onnx 57.0 MB
+model_quantized.onnx 37.0 MB
