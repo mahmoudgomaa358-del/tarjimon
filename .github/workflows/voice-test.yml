@@ -27,7 +27,9 @@ jobs:
           } > tests/results/online.txt 2>&1 || true
       - name: Test Uzbek on-device voice
         run: |
-          cd tests && npm i --silent @huggingface/transformers@3.5.1 && node uz-test.mjs > results/uz.txt 2>&1 || true
+          cd tests && npm i --silent @huggingface/transformers@3.5.1 && rm -f results/*.wav
+          { node uz-test.mjs davron112/mms-tts-uzb-cyrl-onnx fp32 male
+            node uz-test.mjs davron112/mms-tts-uzbek-girl-cyrl-onnx fp32 female ; } > results/uz.txt 2>&1 || true
       - name: Save results
         run: |
           git config user.name "voice-test-bot"; git config user.email "actions@users.noreply.github.com"
