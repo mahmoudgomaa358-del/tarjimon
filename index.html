@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tarjimon</title>
+<meta name="theme-color" content="#14306b">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap">
+<style>
+/* Layout: two stacked halves, one per speaker, each with its own big mic. Rishtan-ceramic cobalt vs pomegranate. */
+:root{
+  --bg:#f3f5fa; --panel:#ffffff; --ink:#14203a; --muted:#5d6782; --line:#dde2ee;
+  --a:#1f4fb8; --a-soft:#e6edfb; --b:#c2324a; --b-soft:#fbe8eb;
+  --font:"Rubik","Noto Sans","Segoe UI",Roboto,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0d1220; --panel:#161d31; --ink:#eef1f8; --muted:#9aa4c0; --line:#28314a;
+  --a:#5b8cf0; --a-soft:#1a2747; --b:#ec6479; --b-soft:#3a1c25; color-scheme:dark;
+}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);
+  display:flex;flex-direction:column;
+  padding:env(safe-area-inset-top,0px) max(12px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(12px,env(safe-area-inset-left,0px));
+  -webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:10px}
+.brand{font-weight:700;font-size:1.25rem;letter-spacing:.01em}
+.brand small{display:block;font-weight:400;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.tools{display:flex;gap:6px}
+.iconbtn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;
+  height:40px;min-width:40px;padding:0 12px;font:500 .85rem var(--font);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.iconbtn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.iconbtn svg{width:18px;height:18px}
+#offline{background:#f4b63f;color:#2a1d00;border-radius:10px;padding:8px 12px;font-size:.88rem;margin-bottom:8px}
+main{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;padding-bottom:10px}
+.side{flex:1;min-height:0;background:var(--panel);border:1px solid var(--line);border-radius:22px;
+  display:flex;flex-direction:column;padding:14px;gap:10px;transition:transform .35s ease}
+.side.flip{transform:rotate(180deg)}
+.side.A{--c:var(--a);--soft:var(--a-soft)} .side.B{--c:var(--b);--soft:var(--b-soft)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+select{appearance:none;border:0;background:var(--soft);color:var(--c);font:700 1rem var(--font);
+  padding:9px 34px 9px 14px;border-radius:999px;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 18px) 55%,calc(100% - 13px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.mini{display:flex;gap:4px}
+.mini button{border:0;background:transparent;color:var(--muted);width:38px;height:38px;border-radius:50%;cursor:pointer}
+.mini button:disabled{opacity:.3}
+.mini svg{width:20px;height:20px}
+.text{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.main-text{font-size:clamp(1.25rem,5.2vw,1.9rem);line-height:1.35;font-weight:500;overflow-wrap:anywhere}
+.sub-text{font-size:.92rem;color:var(--muted);line-height:1.4;overflow-wrap:anywhere}
+.hint{color:var(--muted);font-size:1rem}
+.mic{align-self:center;width:min(42vw,150px);aspect-ratio:1;max-width:100%;border-radius:50%;border:0;cursor:pointer;
+  background:var(--c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  font:500 .86rem var(--font);box-shadow:0 8px 24px color-mix(in srgb,var(--c) 35%,transparent);position:relative;padding:10px;text-align:center}
+.mic svg{width:42%;height:auto}
+.mic.listening::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:4px solid var(--c);animation:pulse 1.2s ease-out infinite}
+.mic.busy{opacity:.7}
+@keyframes pulse{from{transform:scale(.95);opacity:.9}to{transform:scale(1.18);opacity:0}}
+@media (prefers-reduced-motion:reduce){.mic.listening::before{animation:none;opacity:.6}.side{transition:none}}
+.swap{align-self:center;margin:-22px 0;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.swap svg{width:20px;height:20px}
+button:focus-visible,select:focus-visible{outline:3px solid var(--c,var(--a));outline-offset:3px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:.9rem;max-width:90vw}
+#typebox{display:flex;gap:6px}
+#typebox input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 12px;font:1rem var(--font)}
+#typebox button{border:0;background:var(--c);color:#fff;border-radius:12px;padding:0 14px;font:500 .9rem var(--font);cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Tarjimon<small>English · العربية · O‘zbekcha · Русский</small></div>
+  <div class="tools">
+    <button class="iconbtn" id="faceBtn" aria-pressed="false" title="Face-to-face: turn the top half toward the other person">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+      <span>Face-to-face</span>
+    </button>
+    <button class="iconbtn" id="shareBtn" title="Share this app">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+    </button>
+  </div>
+</header>
+<div id="offline" hidden>You are offline. Voice translation needs internet in this version.</div>
+
+<main>
+  <section class="side B" id="sideB"></section>
+  <button class="swap" id="swapBtn" aria-label="Swap languages">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></svg>
+  </button>
+  <section class="side A" id="sideA"></section>
+</main>
+<div id="toast" hidden></div>
+
+<template id="sideTpl">
+  <div class="top">
+    <select aria-label="Language"></select>
+    <div class="mini">
+      <button class="kbd" aria-label="Type instead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></button>
+      <button class="copy" aria-label="Copy" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg></button>
+      <button class="replay" aria-label="Play again" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+    </div>
+  </div>
+  <form class="typebox" id="" hidden><input autocomplete="off"><button type="submit">→</button></form>
+  <div class="text" aria-live="polite"><div class="main-text"></div><div class="sub-text"></div></div>
+  <button class="mic" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>
+    <span class="label"></span>
+  </button>
+</template>
+
+<script>
+const LANGS = {
+  en:{name:"English", speech:"en-US", rtl:false, tap:"Tap and speak", listen:"Listening…", busy:"Translating…", hint:"Tap the button and speak English", noVoice:"No voice for English on this phone"},
+  ar:{name:"العربية", speech:"ar-SA", rtl:true,  tap:"اضغط وتحدث", listen:"أستمع…", busy:"جارٍ الترجمة…", hint:"اضغط على الزر وتحدث بالعربية", noVoice:"لا يوجد صوت عربي على هذا الهاتف"},
+  uz:{name:"O‘zbekcha", speech:"uz-UZ", rtl:false, tap:"Bosing va gapiring", listen:"Tinglayapman…", busy:"Tarjima qilinmoqda…", hint:"Tugmani bosing va o‘zbekcha gapiring", noVoice:"Bu telefonda o‘zbekcha ovoz yo‘q"},
+  ru:{name:"Русский", speech:"ru-RU", rtl:false, tap:"Нажмите и говорите", listen:"Слушаю…", busy:"Перевожу…", hint:"Нажмите кнопку и говорите по-русски", noVoice:"На этом телефоне нет русского голоса"}
+};
+
+const store = {
+  get(k,d){try{const v=localStorage.getItem("tarjimon."+k);return v?JSON.parse(v):d}catch{return d}},
+  set(k,v){try{localStorage.setItem("tarjimon."+k,JSON.stringify(v))}catch{}}
+};
+
+const state = {
+  A:{lang:store.get("A","uz"), main:"", sub:"", say:null},
+  B:{lang:store.get("B","en"), main:"", sub:"", say:null},
+  face:store.get("face",false)
+};
+const ui = {};
+const other = s => s==="A"?"B":"A";
+
+function toast(msg,ms=3000){const t=document.getElementById("toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,ms)}
+
+function build(side){
+  const root=document.getElementById("side"+side);
+  root.appendChild(document.getElementById("sideTpl").content.cloneNode(true));
+  const el={root,select:root.querySelector("select"),main:root.querySelector(".main-text"),sub:root.querySelector(".sub-text"),
+    mic:root.querySelector(".mic"),label:root.querySelector(".label"),copy:root.querySelector(".copy"),replay:root.querySelector(".replay"),
+    kbd:root.querySelector(".kbd"),form:root.querySelector(".typebox"),input:root.querySelector(".typebox input")};
+  el.form.id="type"+side;
+  for(const [code,l] of Object.entries(LANGS)){const o=document.createElement("option");o.value=code;o.textContent=l.name;el.select.appendChild(o)}
+  el.select.addEventListener("change",()=>{
+    if(el.select.value===state[other(side)].lang){state[other(side)].lang=state[side].lang;store.set(other(side),state[other(side)].lang)}
+    state[side].lang=el.select.value;store.set(side,state[side].lang);render();
+  });
+  el.mic.addEventListener("click",()=>toggleListen(side));
+  el.replay.addEventListener("click",()=>{const s=state[side];if(s.main)speak(s.main,s.lang)});
+  el.copy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(state[side].main);toast("Copied")}catch{toast("Could not copy")}});
+  el.kbd.addEventListener("click",()=>{el.form.hidden=!el.form.hidden;if(!el.form.hidden)el.input.focus()});
+  el.form.addEventListener("submit",e=>{e.preventDefault();const t=el.input.value.trim();if(t){el.input.value="";handleHeard(side,t)}});
+  ui[side]=el;
+}
+
+function render(){
+  for(const side of ["A","B"]){
+    const s=state[side],el=ui[side],L=LANGS[s.lang];
+    el.select.value=s.lang;
+    el.main.textContent=s.main||"";
+    el.sub.textContent=s.sub||"";
+    if(!s.main){el.main.innerHTML="";const h=document.createElement("span");h.className="hint";h.textContent=L.hint;el.main.appendChild(h)}
+    el.main.dir=el.sub.dir=L.rtl?"rtl":"ltr";
+    el.input.dir=L.rtl?"rtl":"ltr";
+    el.label.textContent=listening===side?L.listen:busy===side?L.busy:L.tap;
+    el.mic.classList.toggle("listening",listening===side);
+    el.mic.classList.toggle("busy",busy===side);
+    el.copy.disabled=el.replay.disabled=!s.main;
+  }
+  ui.B.root.classList.toggle("flip",state.face);
+  document.getElementById("faceBtn").setAttribute("aria-pressed",String(state.face));
+}
+
+/* ---------- Speech recognition ---------- */
+const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+let rec=null, listening=null, busy=null, heard="";
+
+function toggleListen(side){
+  if(listening===side){rec&&rec.stop();return}
+  if(rec){rec.abort();rec=null}
+  speechSynthesis&&speechSynthesis.cancel();
+  if(!SR){toast("Voice input isn't supported in this browser. Open the app in Google Chrome, or use the keyboard button.",6000);return}
+  if(!navigator.onLine){toast("No internet connection.");return}
+  rec=new SR();
+  rec.lang=LANGS[state[side].lang].speech;
+  rec.interimResults=true; rec.continuous=false; rec.maxAlternatives=1;
+  heard="";
+  rec.onstart=()=>{listening=side;state[side].main="";state[side].sub="";render()};
+  rec.onresult=e=>{
+    let txt="";for(const r of e.results)txt+=r[0].transcript;
+    heard=txt;state[side].main=txt;state[side].sub="";render();
+  };
+  rec.onerror=e=>{
+    const msg={ "not-allowed":"Microphone permission is off. Allow the microphone for this site in Chrome settings.",
+      "no-speech":"I didn't hear anything. Tap and try again.",
+      "language-not-supported":"This phone can't recognise "+LANGS[state[side].lang].name+" speech yet. Install the language in Google voice typing settings.",
+      "network":"Voice recognition needs internet."}[e.error];
+    if(msg)toast(msg,6000);
+  };
+  rec.onend=()=>{listening=null;rec=null;render();if(heard.trim())handleHeard(side,heard.trim())};
+  try{rec.start()}catch{toast("Couldn't start the microphone. Try again.")}
+}
+
+/* ---------- Translation (online) ---------- */
+const cache=store.get("cache",{});
+async function translate(text,from,to){
+  const key=from+">"+to+":"+text;
+  if(cache[key])return cache[key];
+  let out=null;
+  try{
+    const r=await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${encodeURIComponent(text)}`);
+    if(r.ok){const j=await r.json();out=j[0].map(x=>x[0]).join("")}
+  }catch{}
+  if(!out){
+    const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
+    const j=await r.json();out=j&&j.responseData&&j.responseData.translatedText;
+  }
+  if(!out)throw new Error("no translation");
+  cache[key]=out;
+  const keys=Object.keys(cache);if(keys.length>300)delete cache[keys[0]];
+  store.set("cache",cache);
+  return out;
+}
+
+async function handleHeard(side,text){
+  const to=other(side),fromL=state[side].lang,toL=state[to].lang;
+  state[side].main=text;state[side].sub="";
+  busy=side;render();
+  try{
+    const out=await translate(text,fromL,toL);
+    state[to].main=out;state[to].sub=text;
+    state[side].sub="→ "+out;
+    busy=null;render();
+    speak(out,toL);
+  }catch{
+    busy=null;render();
+    toast(navigator.onLine?"Translation failed. Please try again.":"No internet connection.");
+  }
+}
+
+/* ---------- Speech output ---------- */
+let voices=[];
+function loadVoices(){voices=speechSynthesis?speechSynthesis.getVoices():[]}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+let audio=null;
+function speak(text,lang){
+  const L=LANGS[lang];
+  const v=voices.find(v=>v.lang.replace("_","-").toLowerCase().startsWith(lang));
+  if(v&&"speechSynthesis" in window){
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);u.voice=v;u.lang=v.lang;u.rate=.95;
+    speechSynthesis.speak(u);return;
+  }
+  // Fallback: online voice
+  if(audio){audio.pause()}
+  audio=new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${lang}&q=${encodeURIComponent(text.slice(0,200))}`);
+  audio.play().catch(()=>toast(L.noVoice+". The text is shown on screen.",5000));
+}
+
+/* ---------- Wiring ---------- */
+build("A");build("B");render();
+document.getElementById("swapBtn").addEventListener("click",()=>{
+  [state.A,state.B]=[state.B,state.A];store.set("A",state.A.lang);store.set("B",state.B.lang);render();
+});
+document.getElementById("faceBtn").addEventListener("click",()=>{state.face=!state.face;store.set("face",state.face);render()});
+document.getElementById("shareBtn").addEventListener("click",async()=>{
+  const data={title:"Tarjimon",text:"Voice translator: English, Arabic, Uzbek, Russian",url:location.href};
+  try{if(navigator.share){await navigator.share(data);return}}catch(e){if(e.name==="AbortError")return}
+  try{await navigator.clipboard.writeText(location.href);toast("Link copied. Send it to anyone.")}catch{toast(location.href,8000)}
+});
+function net(){document.getElementById("offline").hidden=navigator.onLine}
+addEventListener("online",net);addEventListener("offline",net);net();
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
