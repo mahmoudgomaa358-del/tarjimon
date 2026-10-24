@@ -1,5 +1,5 @@
 Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:00,  7.35it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  5.24it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  5.30it/s]
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  4.70it/s]Fetching 7 files: 100%|██████████| 7/7 [00:02<00:00,  2.58it/s]Fetching 7 files: 100%|██████████| 7/7 [00:02<00:00,  2.63it/s]
 WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
 WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_output_0', type is tensor_type {
   elem_type: 7
