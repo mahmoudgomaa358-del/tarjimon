@@ -1,13 +1,963 @@
 Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:00,  6.36it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  3.50it/s]Fetching 7 files: 100%|██████████| 7/7 [00:01<00:00,  3.57it/s]
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  4.23it/s]Fetching 7 files: 100%|██████████| 7/7 [00:04<00:00,  1.53it/s]Fetching 7 files: 100%|██████████| 7/7 [00:04<00:00,  1.57it/s]
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__30"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__47"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__78"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_8_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__89"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/attention/Slice_9_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__99"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/feed_forward/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.0/feed_forward/Slice_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__161"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__178"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__209"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_8_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__220"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/attention/Slice_9_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__230"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/feed_forward/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.1/feed_forward/Slice_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__292"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__309"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__340"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_8_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__351"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/attention/Slice_9_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__361"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/feed_forward/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.2/feed_forward/Slice_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__423"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__440"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__471"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_8_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__482"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/attention/Slice_9_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__492"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/feed_forward/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.3/feed_forward/Slice_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__554"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__571"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__602"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_8_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__613"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/attention/Slice_9_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__623"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/feed_forward/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.4/feed_forward/Slice_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__685"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__702"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__733"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_8_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__744"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/attention/Slice_9_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_param: "unk__754"
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/feed_forward/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/text_encoder/encoder/layers.5/feed_forward/Slice_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 4
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__935"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__939"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__940"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__941"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_4_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__942"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 2
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/Slice_11_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 2
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_5_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1043"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.4/NonZero_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1049"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 4
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1167"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1171"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1172"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1173"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_4_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1174"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 2
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/Slice_11_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 2
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_5_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1275"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.3/NonZero_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1281"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/Slice_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 4
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1399"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_1_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1403"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_2_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1404"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_3_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1405"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_4_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1406"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/Slice_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 2
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/Slice_11_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 2
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_5_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1507"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/duration_predictor/flows.2/NonZero_6_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_param: "unk__1513"
+    }
+  }
+}
+.
+WARNING:root:Inference failed or unsupported type to quantize for tensor '/Slice_output_0', type is tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+      dim_value: 3
+    }
+    dim {
+      dim_value: 2
+    }
+  }
+}
+.
 Traceback (most recent call last):
-  File "/home/runner/work/tarjimon/tarjimon/tests/build_uz_model.py", line 11, in <module>
-    fp16 = float16.convert_float_to_float16(m, keep_io_types=True, op_block_list=["RandomNormalLike","RandomNormal","RandomUniformLike","Range","CumSum","Pad","Softplus"])
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py", line 249, in convert_float_to_float16
-    n = convert_tensor_float_to_float16(n, min_positive_val, max_finite_val)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxconverter_common/float16.py", line 91, in convert_tensor_float_to_float16
-    float32_list = np.fromstring(tensor.raw_data, dtype='float32')
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: The binary mode of fromstring is removed, use frombuffer instead
+  File "/home/runner/work/tarjimon/tarjimon/tests/build_uz_model.py", line 10, in <module>
+    quantize_dynamic(src + "/onnx/model.onnx", out + "/onnx/model_quantized.onnx", weight_type=QuantType.QUInt8)
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/quantize.py", line 688, in quantize_dynamic
+    quantizer.quantize_model()
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/onnx_quantizer.py", line 211, in quantize_model
+    op_quantizer.quantize()
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/operators/conv.py", line 132, in quantize
+    self.add_bias(nodes, scaled_output_name)
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/onnxruntime/quantization/operators/conv.py", line 36, in add_bias
+    raise ValueError(f"Expected {node.input[1]} to be an initializer")
+ValueError: Expected /flow/flows.3/wavenet/in_layers.0/weight/weight.0/Mul_output_0 to be an initializer
