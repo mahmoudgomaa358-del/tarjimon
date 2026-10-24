@@ -18,7 +18,7 @@ jobs:
       - name: Build phone-sized Uzbek voice
         run: |
           mkdir -p tests/results
-          pip install -q onnx==1.16.2 onnxruntime==1.19.2 onnxconverter-common==1.14.0 huggingface_hub
+          pip install -q "numpy<2" onnx==1.16.2 onnxruntime==1.19.2 onnxconverter-common==1.14.0 huggingface_hub
           python tests/build_uz_model.py > tests/results/build.txt 2>&1 || (cat tests/results/build.txt; true)
       - name: Test it in real Chrome, fully offline from the app's own files
         run: |
