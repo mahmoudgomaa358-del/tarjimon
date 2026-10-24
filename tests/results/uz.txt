@@ -1,4 +1,4 @@
 male tokens 0,13,0,1,0,4,0,7,0,11,0,44,0,6,0,10,0,3,0,26,0
-male fp32 OK seconds=6.24 peak=0.294 ms=3654
+male fp32 OK seconds=6.34 peak=0.315 ms=4648
 female tokens 0,13,0,1,0,4,0,7,0,11,0,44,0,6,0,10,0,3,0,26,0
-female fp32 OK seconds=6.05 peak=0.348 ms=3435
+female fp32 OK seconds=5.86 peak=0.353 ms=2933
