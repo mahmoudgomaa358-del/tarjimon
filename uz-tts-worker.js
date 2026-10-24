@@ -1,9 +1,15 @@
 // Uzbek text-to-speech that runs on the phone itself (Meta MMS voice, Cyrillic model).
 // The model downloads once (cached by the browser) and then works offline.
-import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
+// Everything is loaded from the app's own files, so it keeps working offline.
+import { pipeline, env } from "./vendor/transformers.min.js";
 
-env.allowLocalModels = false;
-const MODEL = "davron112/mms-tts-uzb-cyrl-onnx";
+env.allowRemoteModels = false;
+env.allowLocalModels = true;
+env.localModelPath = new URL("./models/", self.location).href;
+env.backends.onnx.wasm.wasmPaths = new URL("./vendor/", self.location).href;
+env.backends.onnx.wasm.numThreads = 1;
+const MODEL = "uz";
+let DTYPE = "q8";
 let tts = null, dtypeInUse = null;
 
 function progress(p) {
@@ -15,7 +21,7 @@ async function load(dtype) {
   postMessage({ type: "ready" });
 }
 async function ensure() {
-  if (!tts) await load("fp32");   // the fp16 file of this model is broken, so always use full precision
+  if (!tts) await load(DTYPE);
 }
 
 // ---- Uzbek Latin -> Cyrillic (the voice model reads Cyrillic) ----
@@ -61,7 +67,8 @@ async function synth(text) {
 }
 
 onmessage = async ({ data }) => {
-  const { id, text, preload } = data;
+  const { id, text, preload, dtype } = data;
+  if (dtype && !tts) DTYPE = dtype;
   try {
     await ensure();
     if (preload) return;
