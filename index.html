@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Tarjimon</title>
 <meta name="theme-color" content="#14306b">
-<meta name="referrer" content="no-referrer">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -150,8 +149,11 @@ function build(side){
   el.form.id="type"+side;
   for(const [code,l] of Object.entries(LANGS)){const o=document.createElement("option");o.value=code;o.textContent=l.name;el.select.appendChild(o)}
   el.select.addEventListener("change",()=>{
-    if(el.select.value===state[other(side)].lang){state[other(side)].lang=state[side].lang;store.set(other(side),state[other(side)].lang)}
+    unlockAudio();
+    const changed=[side];
+    if(el.select.value===state[other(side)].lang){state[other(side)].lang=state[side].lang;store.set(other(side),state[other(side)].lang);changed.push(other(side))}
     state[side].lang=el.select.value;store.set(side,state[side].lang);render();
+    retranslate(changed,side);
   });
   el.mic.addEventListener("click",()=>toggleListen(side));
   el.replay.addEventListener("click",()=>{unlockAudio();const s=state[side];if(s.main)speak(s.main,s.lang)});
@@ -232,8 +234,10 @@ async function translate(text,from,to){
   return out;
 }
 
+let last=null; // the last thing someone said: {side, text, lang}
 async function handleHeard(side,text){
   const to=other(side),fromL=state[side].lang,toL=state[to].lang;
+  last={side,text,lang:fromL};
   state[side].main=text;state[side].sub="";
   busy=side;render();
   try{
@@ -246,6 +250,27 @@ async function handleHeard(side,text){
     busy=null;render();
     toast(navigator.onLine?"Translation failed. Please try again.":"No internet connection.");
   }
+}
+
+// Show the last conversation again in the newly chosen language(s)
+async function retranslate(sides,speakSide){
+  if(!last)return;
+  const job=last;
+  for(const sd of sides){
+    const lang=state[sd].lang;
+    if(lang===job.lang){state[sd].main=job.text;state[sd].sub="";continue}
+    busy=sd;render();
+    try{
+      const out=await translate(job.text,job.lang,lang);
+      if(last!==job)return;
+      state[sd].main=out;state[sd].sub=sd===job.side?"":job.text;
+      const o=other(sd);
+      if(o===job.side||state[o].main===job.text) state[o].sub=state[o].lang===job.lang?"→ "+out:state[o].sub;
+      busy=null;render();
+      if(sd===speakSide)speak(out,lang);
+    }catch{busy=null;render();toast("Translation failed. Please try again.");return}
+  }
+  render();
 }
 
 /* ---------- Speech output ---------- */
@@ -272,9 +297,9 @@ function getUzWorker(){
     if(data.type==="progress" && !uzReady) toast(`Downloading the Uzbek voice (57 MB, first time only): ${data.pct}%`,4000);
     else if(data.type==="ready"){ if(!uzReady) toast("O‘zbekcha ovoz tayyor ✓ Uzbek voice ready",2500); uzReady=true; }
     else if(data.type==="audio" && data.id===uzSeq) playPcm(data.audio,data.rate);
-    else if(data.type==="error" && data.id===uzSeq){ console.error(data.message); toast("Uzbek voice failed to play. Check your internet for the first download.",5000); }
+    else if(data.type==="error" && data.id===uzSeq){ console.error(data.message); toast("Uzbek voice error: "+data.message,10000); }
   };
-  uzWorker.onerror=e=>{console.error(e);toast("Uzbek voice couldn't start on this phone.",5000)};
+  uzWorker.onerror=e=>{console.error(e);toast("Uzbek voice couldn't start: "+(e.message||"unknown error"),10000)};
   return uzWorker;
 }
 function playPcm(pcm,rate){
@@ -298,24 +323,8 @@ function speak(text,lang){
     const u=new SpeechSynthesisUtterance(text);u.voice=v;u.lang=v.lang;u.rate=.95;
     speechSynthesis.speak(u);return;
   }
-  // Fallback: online voice (Google), played in pieces of up to ~180 characters
-  const chunks=[];let rest=text.trim();
-  while(rest.length){
-    if(rest.length<=180){chunks.push(rest);break}
-    let cut=Math.max(rest.lastIndexOf(". ",180),rest.lastIndexOf("، ",180),rest.lastIndexOf(", ",180),rest.lastIndexOf("? ",180),rest.lastIndexOf("! ",180));
-    if(cut<60)cut=rest.lastIndexOf(" ",180);
-    if(cut<1)cut=180;
-    chunks.push(rest.slice(0,cut+1).trim());rest=rest.slice(cut+1).trim();
-  }
-  const run=++ttsRun;
-  const playNext=i=>{
-    if(run!==ttsRun||i>=chunks.length)return;
-    audio=new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${lang}&total=${chunks.length}&idx=${i}&textlen=${chunks[i].length}&q=${encodeURIComponent(chunks[i])}`);
-    audio.referrerPolicy="no-referrer";
-    audio.onended=()=>playNext(i+1);
-    audio.play().catch(()=>{if(i===0)toast(L.noVoice+". The text is shown on screen.",5000)});
-  };
-  playNext(0);
+  // No voice for this language on the phone
+  toast(L.noVoice+". Install it in Android Settings → Text-to-speech → Google → Install voice data.",7000);
 }
 let ttsRun=0;
 
