@@ -9,7 +9,7 @@ env.localModelPath = new URL("./models/", self.location).href;
 env.backends.onnx.wasm.wasmPaths = new URL("./vendor/", self.location).href;
 env.backends.onnx.wasm.numThreads = 1;
 const MODEL = "uz";
-let DTYPE = "q8";
+let DTYPE = "fp16";   // 57 MB; "q8" (37 MB) also works
 let tts = null, dtypeInUse = null;
 
 function progress(p) {

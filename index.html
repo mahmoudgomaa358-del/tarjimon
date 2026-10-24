@@ -269,7 +269,7 @@ function getUzWorker(){
   if(uzWorker) return uzWorker;
   uzWorker=new Worker("uz-tts-worker.js",{type:"module"});
   uzWorker.onmessage=({data})=>{
-    if(data.type==="progress" && !uzReady) toast(`Downloading the Uzbek voice: ${data.pct}% (first time only)`,4000);
+    if(data.type==="progress" && !uzReady) toast(`Downloading the Uzbek voice (57 MB, first time only): ${data.pct}%`,4000);
     else if(data.type==="ready"){ if(!uzReady) toast("O‘zbekcha ovoz tayyor ✓ Uzbek voice ready",2500); uzReady=true; }
     else if(data.type==="audio" && data.id===uzSeq) playPcm(data.audio,data.rate);
     else if(data.type==="error" && data.id===uzSeq){ console.error(data.message); toast("Uzbek voice failed to play. Check your internet for the first download.",5000); }
