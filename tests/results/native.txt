@@ -1,0 +1,5 @@
+[1;31m2026-10-25 01:58:34.273490728 [E:onnxruntime:, sequential_executor.cc:516 ExecuteKernel] Non-zero status code returned while running Reshape node. Name:'/Reshape_1' Status Message: /onnxruntime_src/onnxruntime/core/providers/cpu/tensor/reshape_helper.h:28 onnxruntime::ReshapeHelper::ReshapeHelper(const onnxruntime::TensorShape&, onnxruntime::TensorShapeVector&, bool) i < input_shape.NumDimensions() was false. The dimension with value zero exceeds the dimension size of the input tensor.
+[m
+fp16 FAIL [ONNXRuntimeError] : 6 : RUNTIME_EXCEPTION : Non-zero status code returned while running Reshape node. Name:'/Reshape_1' Status Message: /onnxruntime_src/onnxruntime/core/providers/cpu/tensor/reshape_helper.h:28 onnxruntime::ReshapeHelper::ReshapeHelper(const onnxruntime::TensorShape&, onnxruntime::TensorShapeVector&, bool) i < input_shape.NumDimensions() was false. The dimension with value zero exceeds the dimension size of the input tensor.
+
+q8 OK inputs ['input_ids', 'attention_mask'] seconds 3.57 peak 0.271 ms 4807
