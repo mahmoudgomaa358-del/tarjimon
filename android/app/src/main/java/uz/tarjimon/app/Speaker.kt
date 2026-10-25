@@ -29,7 +29,7 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
         var shown = -1
         uzbek.onProgress = { pct ->
             val step = pct / 20 * 20
-            if (step != shown) { shown = step; onMessage("Downloading the Uzbek voice (57 MB, one time only): $step%") }
+            if (step != shown) { shown = step; onMessage("Downloading the Uzbek voice (37 MB, one time only): $step%") }
         }
         // Prepare the Uzbek voice in the background so the first sentence is quick.
         scope.launch(Dispatchers.Default) { runCatching { uzbek.ensure() } }
@@ -67,7 +67,7 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
             } catch (e: Throwable) {
                 if (e is kotlinx.coroutines.CancellationException) throw e
                 onMessage(if (!uzbek.isDownloaded() && !Translator.isOnline(ctx))
-                    "Connect to the internet once so the Uzbek voice can download (57 MB)."
+                    "Connect to the internet once so the Uzbek voice can download (37 MB)."
                 else "Uzbek voice error: ${e.message ?: e.javaClass.simpleName}")
                 return@launch
             }

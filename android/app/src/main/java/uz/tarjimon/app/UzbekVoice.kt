@@ -23,13 +23,14 @@ class UzbekVoice(private val ctx: Context) {
     val sampleRate = 16000
     /** Called with 0..100 while the voice downloads. */
     var onProgress: ((Int) -> Unit)? = null
-    val modelFile get() = File(ctx.filesDir, "uz_voice_fp16.onnx")
+    val modelFile get() = File(ctx.filesDir, "uz_voice_q8.onnx")
     fun isDownloaded() = modelFile.length() == MODEL_SIZE
 
     @Synchronized
     fun ensure() {
         if (session != null) return
-        File(ctx.filesDir, "uz_voice_v1.onnx").delete()   // from an older version
+        File(ctx.filesDir, "uz_voice_v1.onnx").delete()   // from older versions
+        File(ctx.filesDir, "uz_voice_fp16.onnx").delete()
         val file = modelFile
         if (!isDownloaded()) download(file)
         val opts = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2) }
@@ -118,8 +119,8 @@ class UzbekVoice(private val ctx: Context) {
     }
 
     companion object {
-        const val MODEL_URL = "https://mahmoudgomaa358-del.github.io/tarjimon/models/uz/onnx/model_fp16.onnx"
-        const val MODEL_SIZE = 57375513L
+        const val MODEL_URL = "https://mahmoudgomaa358-del.github.io/tarjimon/models/uz/onnx/model_quantized.onnx"
+        const val MODEL_SIZE = 37555282L
         private val ONES = listOf("nol", "bir", "ikki", "uch", "to'rt", "besh", "olti", "yetti", "sakkiz", "to'qqiz")
         private val TENS = listOf("", "o'n", "yigirma", "o'ttiz", "qirq", "ellik", "oltmish", "yetmish", "sakson", "to'qson")
         private fun num(n: Long): String = when {
