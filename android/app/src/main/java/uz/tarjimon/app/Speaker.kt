@@ -65,6 +65,7 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
             val pcm = try {
                 withContext(Dispatchers.Default) { uzbek.synth(text) }
             } catch (e: Throwable) {
+                if (e is kotlinx.coroutines.CancellationException) throw e
                 onMessage(if (!uzbek.isDownloaded() && !Translator.isOnline(ctx))
                     "Connect to the internet once so the Uzbek voice can download (57 MB)."
                 else "Uzbek voice error: ${e.message ?: e.javaClass.simpleName}")
