@@ -8,23 +8,17 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.11" }
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - name: Build phone-sized Uzbek voice
+      - name: Run voice files with the app's engine version
         run: |
-          mkdir -p tests/results
-          pip install -q "numpy<2" onnx==1.16.2 onnxruntime==1.19.2 onnxconverter-common==1.14.0 huggingface_hub
-          python tests/build_uz_model.py > tests/results/build.txt 2>&1 || (cat tests/results/build.txt; true)
-      - name: Test it in real Chrome, fully offline from the app's own files
-        run: |
-          cd tests && npm i --silent playwright@1.48.2 && npx playwright install --with-deps chromium > /dev/null 2>&1
-          node local-browser-test.mjs > results/local-browser.txt 2>&1 || true
-      - name: Save results and model
+          mkdir -p tests/results && rm -f tests/results/native-*.wav
+          pip install -q "numpy<2" onnxruntime==1.19.2
+          python tests/native_voice_test.py > tests/results/native.txt 2>&1 || true
+      - name: Save results
         run: |
           git config user.name "voice-test-bot"; git config user.email "actions@users.noreply.github.com"
-          git add tests/results models; git commit -m "voice build + test results [skip ci]" || true; git push
+          git add tests/results; git commit -m "voice test results [skip ci]" || true; git pull --rebase -q; git push
