@@ -33,13 +33,33 @@ class UzbekVoice(private val ctx: Context) {
         File(ctx.filesDir, "uz_voice_fp16.onnx").delete()
         val file = modelFile
         if (!isDownloaded()) download(file)
-        val opts = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2) }
+        val opts = OrtSession.SessionOptions().apply { setIntraOpNumThreads(maxOf(2, minOf(4, Runtime.getRuntime().availableProcessors()))) }
         session = env.createSession(file.absolutePath, opts)
         val js = JSONObject(ctx.assets.open("uz/vocab.json").bufferedReader().use { it.readText() })
         val map = HashMap<Char, Long>()
         js.keys().forEach { k -> if (k.length == 1) map[k[0]] = js.getLong(k) }
         vocab = map
+        runCatching { run(tokens("салом")) }   // warm-up so the first real sentence is quick
     }
+
+    /** Splits text into short pieces (sentences, long ones at commas) so speaking can start early. */
+    fun pieces(text: String): List<String> {
+        val out = ArrayList<String>()
+        for (sentence in toCyrillic(text).split(Regex("[.!?;:\\n]+"))) {
+            var cur = StringBuilder()
+            for (part in sentence.split(",")) {
+                val p = clean(part); if (p.isBlank()) continue
+                if (cur.isNotEmpty() && cur.length + p.length > 60) { out.add(cur.toString()); cur = StringBuilder() }
+                if (cur.isNotEmpty()) cur.append(' ')
+                cur.append(p)
+            }
+            if (cur.isNotEmpty()) out.add(cur.toString())
+        }
+        return out
+    }
+
+    /** Makes audio for one piece. */
+    fun synthPiece(piece: String): FloatArray { ensure(); return run(tokens(piece)) }
 
     private fun download(target: File) {
         val part = File(target.path + ".part")

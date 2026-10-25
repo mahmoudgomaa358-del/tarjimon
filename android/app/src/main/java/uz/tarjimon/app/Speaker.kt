@@ -7,9 +7,12 @@ import android.media.AudioTrack
 import android.speech.tts.TextToSpeech
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Locale
 
 /** Reads translations aloud: phone voices for English/Arabic/Russian, the built-in voice for Uzbek. */
@@ -60,19 +63,55 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
         engine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "tarjimon")
     }
 
+    /** Speaks Uzbek piece by piece: the first piece plays while the next ones are being made. */
     private fun speakUzbek(text: String) {
-        uzJob = scope.launch {
-            val pcm = try {
-                withContext(Dispatchers.Default) { uzbek.synth(text) }
+        uzJob = scope.launch(Dispatchers.Default) {
+            val queue = Channel<FloatArray>(capacity = 8)
+            val rate = uzbek.sampleRate
+            val player = launch(Dispatchers.IO) {
+                val min = AudioTrack.getMinBufferSize(rate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT)
+                val t = AudioTrack.Builder()
+                    .setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build())
+                    .setAudioFormat(AudioFormat.Builder().setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                        .setSampleRate(rate).setChannelMask(AudioFormat.CHANNEL_OUT_MONO).build())
+                    .setTransferMode(AudioTrack.MODE_STREAM)
+                    .setBufferSizeInBytes(maxOf(min, rate))
+                    .build()
+                track = t
+                var started = false
+                val gap = ShortArray((rate * 0.2).toInt())
+                var written = 0
+                try {
+                    for (pcm in queue) {
+                        val shorts = ShortArray(pcm.size) { i -> (pcm[i].coerceIn(-1f, 1f) * 32767).toInt().toShort() }
+                        if (!started) { t.play(); started = true }
+                        if (written > 0) { t.write(gap, 0, gap.size); written += gap.size }
+                        var off = 0
+                        while (off < shorts.size && isActive) { val n = t.write(shorts, off, shorts.size - off); if (n <= 0) break; off += n }
+                        written += shorts.size
+                    }
+                    // let the end of the audio finish before releasing
+                    while (isActive && t.playState == AudioTrack.PLAYSTATE_PLAYING && t.playbackHeadPosition < written) delay(50)
+                } finally {
+                    runCatching { t.stop(); t.release() }
+                    if (track === t) track = null
+                }
+            }
+            try {
+                for (piece in uzbek.pieces(text)) {
+                    val pcm = uzbek.synthPiece(piece)
+                    if (pcm.isNotEmpty()) queue.send(pcm)
+                }
             } catch (e: Throwable) {
-                if (e is kotlinx.coroutines.CancellationException) throw e
+                if (e is CancellationException) throw e
                 onMessage(if (!uzbek.isDownloaded() && !Translator.isOnline(ctx))
                     "Connect to the internet once so the Uzbek voice can download (37 MB)."
                 else "Uzbek voice error: ${e.message ?: e.javaClass.simpleName}")
-                return@launch
+            } finally {
+                queue.close()
             }
-            if (pcm.isEmpty()) return@launch
-            play(pcm, uzbek.sampleRate)
+            player.join()
         }
     }
 
