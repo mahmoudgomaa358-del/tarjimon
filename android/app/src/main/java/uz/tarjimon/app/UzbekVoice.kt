@@ -6,6 +6,10 @@ import ai.onnxruntime.OrtSession
 import android.content.Context
 import org.json.JSONObject
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
 import java.nio.LongBuffer
 
 /**
@@ -17,22 +21,61 @@ class UzbekVoice(private val ctx: Context) {
     private var session: OrtSession? = null
     private var vocab: Map<Char, Long> = emptyMap()
     val sampleRate = 16000
+    /** Called with 0..100 while the voice downloads. */
+    var onProgress: ((Int) -> Unit)? = null
+    val modelFile get() = File(ctx.filesDir, "uz_voice_fp16.onnx")
+    fun isDownloaded() = modelFile.length() == MODEL_SIZE
 
     @Synchronized
     fun ensure() {
         if (session != null) return
-        val file = File(ctx.filesDir, "uz_voice_v1.onnx")
-        if (!file.exists() || file.length() == 0L) {
-            val tmp = File(file.path + ".tmp")
-            ctx.assets.open("uz/model.onnx").use { input -> tmp.outputStream().use { input.copyTo(it) } }
-            tmp.renameTo(file)
-        }
+        File(ctx.filesDir, "uz_voice_v1.onnx").delete()   // from an older version
+        val file = modelFile
+        if (!isDownloaded()) download(file)
         val opts = OrtSession.SessionOptions().apply { setIntraOpNumThreads(2) }
         session = env.createSession(file.absolutePath, opts)
         val js = JSONObject(ctx.assets.open("uz/vocab.json").bufferedReader().use { it.readText() })
         val map = HashMap<Char, Long>()
         js.keys().forEach { k -> if (k.length == 1) map[k[0]] = js.getLong(k) }
         vocab = map
+    }
+
+    private fun download(target: File) {
+        val part = File(target.path + ".part")
+        var attempt = 0
+        while (true) {
+            try {
+                if (part.length() >= MODEL_SIZE) part.delete()
+                val have = if (part.exists()) part.length() else 0L
+                val c = URL(MODEL_URL).openConnection() as HttpURLConnection
+                c.connectTimeout = 15000; c.readTimeout = 30000
+                if (have > 0) c.setRequestProperty("Range", "bytes=$have-")
+                val code = c.responseCode
+                if (code != 200 && code != 206) throw IOException("HTTP $code")
+                val append = code == 206
+                var done = if (append) have else 0L
+                var lastPct = -1
+                FileOutputStream(part, append).use { out ->
+                    c.inputStream.use { input ->
+                        val buf = ByteArray(64 * 1024)
+                        while (true) {
+                            val n = input.read(buf); if (n < 0) break
+                            out.write(buf, 0, n); done += n
+                            val pct = (done * 100 / MODEL_SIZE).toInt()
+                            if (pct != lastPct) { lastPct = pct; onProgress?.invoke(pct) }
+                        }
+                    }
+                }
+                c.disconnect()
+                if (part.length() != MODEL_SIZE) throw IOException("download incomplete")
+                if (!part.renameTo(target)) throw IOException("could not save the voice")
+                return
+            } catch (e: Exception) {
+                attempt++
+                if (attempt >= 6) throw IOException("Uzbek voice download failed. Check your internet and try again.", e)
+                Thread.sleep(2000L * attempt)
+            }
+        }
     }
 
     /** Returns 16 kHz mono audio samples. */
@@ -75,6 +118,8 @@ class UzbekVoice(private val ctx: Context) {
     }
 
     companion object {
+        const val MODEL_URL = "https://mahmoudgomaa358-del.github.io/tarjimon/models/uz/onnx/model_fp16.onnx"
+        const val MODEL_SIZE = 57375513L
         private val ONES = listOf("nol", "bir", "ikki", "uch", "to'rt", "besh", "olti", "yetti", "sakkiz", "to'qqiz")
         private val TENS = listOf("", "o'n", "yigirma", "o'ttiz", "qirq", "ellik", "oltmish", "yetmish", "sakson", "to'qson")
         private fun num(n: Long): String = when {

@@ -26,6 +26,11 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
             ttsReady = status == TextToSpeech.SUCCESS
             pending?.let { (t, l) -> pending = null; speak(t, l) }
         }
+        var shown = -1
+        uzbek.onProgress = { pct ->
+            val step = pct / 20 * 20
+            if (step != shown) { shown = step; onMessage("Downloading the Uzbek voice (57 MB, one time only): $step%") }
+        }
         // Prepare the Uzbek voice in the background so the first sentence is quick.
         scope.launch(Dispatchers.Default) { runCatching { uzbek.ensure() } }
     }
@@ -40,7 +45,10 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
     fun speak(text: String, code: String) {
         if (text.isBlank()) return
         stop()
-        if (code == "uz") { speakUzbek(text); return }
+        if (code == "uz") {
+            if (!uzbek.isDownloaded() && Translator.isOnline(ctx)) onMessage("Getting the Uzbek voice ready…")
+            speakUzbek(text); return
+        }
         val engine = tts
         if (engine == null || !ttsReady) { pending = text to code; return }
         val r = engine.setLanguage(Locale.forLanguageTag(lang(code).locale))
@@ -57,7 +65,9 @@ class Speaker(private val ctx: Context, private val scope: CoroutineScope, priva
             val pcm = try {
                 withContext(Dispatchers.Default) { uzbek.synth(text) }
             } catch (e: Throwable) {
-                onMessage("Uzbek voice error: ${e.message ?: e.javaClass.simpleName}")
+                onMessage(if (!uzbek.isDownloaded() && !Translator.isOnline(ctx))
+                    "Connect to the internet once so the Uzbek voice can download (57 MB)."
+                else "Uzbek voice error: ${e.message ?: e.javaClass.simpleName}")
                 return@launch
             }
             if (pcm.isEmpty()) return@launch

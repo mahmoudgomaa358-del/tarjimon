@@ -15,25 +15,27 @@ jobs:
         with: { distribution: temurin, java-version: "17" }
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: "8.9" }
-      - name: Add the Uzbek voice to the app
+      - name: Add the Uzbek voice alphabet to the app
         run: |
           mkdir -p android/app/src/main/assets/uz
-          cp models/uz/onnx/model_fp16.onnx android/app/src/main/assets/uz/model.onnx
           cp models/uz/vocab.json android/app/src/main/assets/uz/vocab.json
       - name: Build APK
         run: |
           set -o pipefail
           cd android && gradle assembleRelease --no-daemon --stacktrace 2>&1 | tee ../build.log
-          cp app/build/outputs/apk/release/app-release.apk ../Tarjimon.apk
-          ls -la ../Tarjimon.apk
+          cp app/build/outputs/apk/release/app-arm64-v8a-release.apk ../Tarjimon.apk
+          cp app/build/outputs/apk/release/app-armeabi-v7a-release.apk ../Tarjimon-old-phones.apk
+          ls -la ../Tarjimon*.apk
       - name: Publish download
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.${{ github.run_number }}
           name: Tarjimon 1.0.${{ github.run_number }}
-          body: "Tarjimon voice translator for Android. Download Tarjimon.apk below and open it on your phone to install."
+          body: "Tarjimon voice translator for Android. Most phones: download Tarjimon.apk. If it says the app isn't compatible (phones from before ~2017), use Tarjimon-old-phones.apk."
           make_latest: true
-          files: Tarjimon.apk
+          files: |
+            Tarjimon.apk
+            Tarjimon-old-phones.apk
       - name: Save build report
         if: always()
         run: |
